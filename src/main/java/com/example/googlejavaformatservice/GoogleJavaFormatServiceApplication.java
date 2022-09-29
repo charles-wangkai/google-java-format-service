@@ -20,7 +20,11 @@ public class GoogleJavaFormatServiceApplication {
   }
 
   @PostMapping
-  public Object format(@RequestBody String code) throws FormatterException {
-    return formatter.formatSourceAndFixImports(code);
+  public Object format(@RequestBody String code) {
+    try {
+      return formatter.formatSourceAndFixImports(code);
+    } catch (FormatterException e) {
+      return code;
+    }
   }
 }
